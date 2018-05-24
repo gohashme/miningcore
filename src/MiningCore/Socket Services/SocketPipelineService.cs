@@ -42,31 +42,25 @@ namespace MiningCore.Socket_Services
 
         public async Task SendMessage(PipePackage message)
         {
-            logger.Info(">>>>>>>>>>>>>>>>>>>>>>>>> " + JsonConvert.SerializeObject(new object[] { message }));
+            logger.Info(">>>>>>>>>>>>>>>>>>>>>>>>> " + JsonConvert.SerializeObject(message));
 
-
-            foreach (var item in this.WebSocketConnectionManager.GetAll())
+            switch (message.Name)
             {
-                switch (message.Name)
-                {
-                    case "Block":
-                        await InvokeClientMethodAsync(item.Key, "blocks", new object[] { message });
-                        break;
-                    case "Share":
-                        await InvokeClientMethodAsync(item.Key, "shares", new object[] { message });
-                        break;
-                    case "PoolStat":
-                        await InvokeClientMethodAsync(item.Key, "poolStats", new object[] { message });
-                        break;
-                    case "MinerStat":
-                        await InvokeClientMethodAsync(item.Key, "minerStats", new object[] { message });
-                        break;
-                    default:
-                        break;
-                }
+                case "Block":
+                    await InvokeClientMethodToAllAsync("blocks", new object[] { message });
+                    break;
+                case "Share":
+                    await InvokeClientMethodToAllAsync("shares", new object[] { message });
+                    break;
+                case "PoolStat":
+                    await InvokeClientMethodToAllAsync("poolStats", new object[] { message });
+                    break;
+                case "MinerStat":
+                    await InvokeClientMethodToAllAsync("minerStats", new object[] { message });
+                    break;
+                default:
+                    break;
             }
-
-           
         }
 
     }
