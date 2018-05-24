@@ -47,16 +47,16 @@ namespace MiningCore.Socket_Services
             switch (message.Name)
             {
                 case "Block":
-                    await InvokeClientMethodToAllAsync("blocks", new object[] { message });
+                    await InvokeClientMethodToAllAsync("blocks", message.Data);
                     break;
                 case "Share":
-                    await InvokeClientMethodToAllAsync("shares", new object[] { message });
+                    await InvokeClientMethodToAllAsync("shares", message.Data);
                     break;
                 case "PoolStat":
-                    await InvokeClientMethodToAllAsync("poolStats", new object[] { message });
+                    await InvokeClientMethodToAllAsync("poolStats", message.Data);
                     break;
                 case "MinerStat":
-                    await InvokeClientMethodToAllAsync("minerStats", new object[] { message });
+                    await InvokeClientMethodToAllAsync("minerStats", message.Data);
                     break;
                 default:
                     break;
