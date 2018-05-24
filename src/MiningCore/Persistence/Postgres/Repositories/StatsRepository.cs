@@ -28,6 +28,7 @@ using MiningCore.Extensions;
 using MiningCore.Persistence.Model;
 using MiningCore.Persistence.Model.Projections;
 using MiningCore.Persistence.Repositories;
+using MiningCore.Socket_Services.Models;
 using MiningCore.Time;
 using NBitcoin;
 using NLog;
@@ -37,21 +38,23 @@ namespace MiningCore.Persistence.Postgres.Repositories
 {
     public class StatsRepository : IStatsRepository
     {
-        public StatsRepository(IMapper mapper, IMasterClock clock)
+        public StatsRepository(IMapper mapper, IMasterClock clock, EventHandler.SocketEventHandler socketEvent)
         {
             this.mapper = mapper;
             this.clock = clock;
+            this.socketEvent = socketEvent;
         }
 
         private readonly IMapper mapper;
         private readonly IMasterClock clock;
+        private readonly EventHandler.SocketEventHandler socketEvent;
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private static readonly TimeSpan MinerStatsMaxAge = TimeSpan.FromMinutes(20);
 
         public void InsertPoolStats(IDbConnection con, IDbTransaction tx, PoolStats stats)
         {
             logger.LogInvoke();
-
+            socketEvent.Publish<PipePackage>(new PipePackage() { Name = "PoolStats", Data = stats });
             var mapped = mapper.Map<Entities.PoolStats>(stats);
 
             var query = "INSERT INTO poolstats(poolid, connectedminers, poolhashrate, networkhashrate, " +
@@ -65,7 +68,7 @@ namespace MiningCore.Persistence.Postgres.Repositories
         public void InsertMinerWorkerPerformanceStats(IDbConnection con, IDbTransaction tx, MinerWorkerPerformanceStats stats)
         {
             logger.LogInvoke();
-
+            socketEvent.Publish<PipePackage>(new PipePackage() { Name = "MinerWorkerPerformanceStats", Data = stats });
             var mapped = mapper.Map<Entities.MinerWorkerPerformanceStats>(stats);
 
             if (string.IsNullOrEmpty(mapped.Worker))
