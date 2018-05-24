@@ -42,9 +42,13 @@ namespace MiningCore.Socket_Services
 
         public async Task SendMessage(PipePackage message)
         {
-            logger.Info(">>>>>>>>>>>>>>>>>>>>>>>>> " + JsonConvert.SerializeObject(message));
+            logger.Info(">>>>>>>>>>>>>>>>>>>>>>>>> " + JsonConvert.SerializeObject(new object[] { message }));
 
-            await InvokeClientMethodToAllAsync("pipeline", message);
+
+            foreach (var item in this.WebSocketConnectionManager.GetAll())
+            {
+                await InvokeClientMethodAsync(item.Key,"pipeline", new object[] {message});
+            }
         }
 
     }
