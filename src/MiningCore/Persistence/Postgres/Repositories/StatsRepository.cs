@@ -54,7 +54,7 @@ namespace MiningCore.Persistence.Postgres.Repositories
         public void InsertPoolStats(IDbConnection con, IDbTransaction tx, PoolStats stats)
         {
             logger.LogInvoke();
-            socketEvent.Publish<PipePackage>(new PipePackage() { Name = "PoolStats", Data = stats });
+            socketEvent.Publish<PipePackage>(new PipePackage() { Name = "PoolStat", Data = stats });
             var mapped = mapper.Map<Entities.PoolStats>(stats);
 
             var query = "INSERT INTO poolstats(poolid, connectedminers, poolhashrate, networkhashrate, " +
@@ -68,7 +68,7 @@ namespace MiningCore.Persistence.Postgres.Repositories
         public void InsertMinerWorkerPerformanceStats(IDbConnection con, IDbTransaction tx, MinerWorkerPerformanceStats stats)
         {
             logger.LogInvoke();
-            socketEvent.Publish<PipePackage>(new PipePackage() { Name = "MinerWorkerPerformanceStats", Data = stats });
+            socketEvent.Publish<PipePackage>(new PipePackage() { Name = "MinerStat", Data = stats });
             var mapped = mapper.Map<Entities.MinerWorkerPerformanceStats>(stats);
 
             if (string.IsNullOrEmpty(mapped.Worker))

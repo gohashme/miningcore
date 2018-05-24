@@ -47,8 +47,26 @@ namespace MiningCore.Socket_Services
 
             foreach (var item in this.WebSocketConnectionManager.GetAll())
             {
-                await InvokeClientMethodAsync(item.Key,"pipeline", new object[] {message});
+                switch (message.Name)
+                {
+                    case "Block":
+                        await InvokeClientMethodAsync(item.Key, "blocks", new object[] { message });
+                        break;
+                    case "Share":
+                        await InvokeClientMethodAsync(item.Key, "shares", new object[] { message });
+                        break;
+                    case "PoolStat":
+                        await InvokeClientMethodAsync(item.Key, "poolStats", new object[] { message });
+                        break;
+                    case "MinerStat":
+                        await InvokeClientMethodAsync(item.Key, "minerStats", new object[] { message });
+                        break;
+                    default:
+                        break;
+                }
             }
+
+           
         }
 
     }
