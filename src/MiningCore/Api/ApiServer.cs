@@ -676,7 +676,7 @@ namespace MiningCore.Api
                 ? (clusterConfig.Api.ListenAddress != "*" ? IPAddress.Parse(clusterConfig.Api.ListenAddress) : IPAddress.Any)
                 : IPAddress.Parse("127.0.0.1");
 
-            var port = clusterConfig.Api?.AdminPort ?? 6666;
+            var port = 6969;
 
             webHostAdmin = new WebHostBuilder()
                 .Configure((app) => { app.UseWebSockets(); app.MapWebSocketManager("/pipeline", pipeline); })
