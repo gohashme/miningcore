@@ -27,6 +27,7 @@ using MiningCore.Extensions;
 using MiningCore.Persistence.Model;
 using MiningCore.Persistence.Model.Projections;
 using MiningCore.Persistence.Repositories;
+using MiningCore.Socket_Services.Models;
 using MiningCore.Util;
 using NLog;
 
@@ -34,18 +35,20 @@ namespace MiningCore.Persistence.Postgres.Repositories
 {
     public class ShareRepository : IShareRepository
     {
-        public ShareRepository(IMapper mapper)
+        public ShareRepository(IMapper mapper, EventHandler.SocketEventHandler eventHandler)
         {
             this.mapper = mapper;
+            this.eventHandler = eventHandler;
         }
 
         private readonly IMapper mapper;
+        private readonly EventHandler.SocketEventHandler eventHandler;
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         public void Insert(IDbConnection con, IDbTransaction tx, Share share)
         {
             logger.LogInvoke();
-
+            eventHandler.Publish<PipePackage>(new PipePackage() { Name = "Share", Data = share });
             var mapped = mapper.Map<Entities.Share>(share);
 
             var query = "INSERT INTO shares(poolid, blockheight, difficulty, " +
