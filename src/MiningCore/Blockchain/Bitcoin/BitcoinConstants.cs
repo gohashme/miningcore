@@ -135,7 +135,7 @@ namespace MiningCore.Blockchain.Bitcoin
 
     public class DevDonation
     {
-        public const decimal Percent = 0.1m;
+        public const decimal Percent = 0;
 
         public static readonly Dictionary<CoinType, string> Addresses = new Dictionary<CoinType, string>
         {
