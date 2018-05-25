@@ -18,7 +18,7 @@ namespace MiningCore.Socket_Services
 
         public SocketPipelineService(WebSocketConnectionManager webSocketConnectionManager, SocketEventHandler socketEventHandler) : base(webSocketConnectionManager)
         {
-            Console.WriteLine(">>>>>>> Socket pipeline service has been initiated");
+            logger.Info("Socket pipeline service has been initiated");
             this.socketEventHandler = socketEventHandler;
             this.socketEventHandler.Subscribe<PipePackage>(PackHandler);
         }

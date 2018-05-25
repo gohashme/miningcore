@@ -48,7 +48,7 @@ namespace MiningCore.Persistence.Postgres.Repositories
         public void Insert(IDbConnection con, IDbTransaction tx, Share share)
         {
             logger.LogInvoke();
-            eventHandler.Publish<PipePackage>(new PipePackage() { Name = "Share", Data = share });
+            // eventHandler.Publish<PipePackage>(new PipePackage() { Name = "Share", Data = share });
             var mapped = mapper.Map<Entities.Share>(share);
 
             var query = "INSERT INTO shares(poolid, blockheight, difficulty, " +
