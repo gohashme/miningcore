@@ -49,9 +49,9 @@ namespace MiningCore.Socket_Services
                 case "Block":
                     await InvokeClientMethodToAllAsync("blocks", message.Data);
                     break;
-                case "Share":
-                    await InvokeClientMethodToAllAsync("shares", message.Data);
-                    break;
+                // case "Share":
+                //     await InvokeClientMethodToAllAsync("shares", message.Data);
+                //     break;
                 case "PoolStat":
                     await InvokeClientMethodToAllAsync("poolStats", message.Data);
                     break;
