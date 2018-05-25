@@ -42,7 +42,7 @@ namespace MiningCore.Socket_Services
 
         public async Task SendMessage(PipePackage message)
         {
-            logger.Info(">>>>>>>>>>>>>>>>>>>>>>>>> " + JsonConvert.SerializeObject(message));
+            logger.Info("Broadcasting " + message.Name + " data");
 
             switch (message.Name)
             {
