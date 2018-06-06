@@ -474,8 +474,11 @@ namespace MiningCore.Api
                 await SendJsonAsync(context, obj);
 
             }
+            else
+            {
+                await SendJsonAsync(context, stats);
+            }
 
-            await SendJsonAsync(context, stats);
         }
 
         private async Task PageMinerPaymentsAsync(HttpContext context, Match m)
