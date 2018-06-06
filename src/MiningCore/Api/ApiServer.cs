@@ -470,8 +470,13 @@ namespace MiningCore.Api
 
                 stats.PerformanceSamples = GetMinerPerformanceInternal(perfMode, pool, address);
             }
-            var array =  stats.Performance.Workers.Values.ToArray();
-            stats.Performance.WorkersArray = array;
+
+            if (stats.Performance.Workers != null)
+            {
+                var array = stats.Performance.Workers.Values.ToArray();
+                stats.Performance.WorkersArray = array;
+            }
+           
             await SendJsonAsync(context, stats);
         }
 
