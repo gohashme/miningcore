@@ -24,7 +24,8 @@ using System.Collections.Generic;
 namespace MiningCore.Persistence.Model.Projections
 {
     public class WorkerPerformanceStats
-    {
+    {   
+        public string Worker { get; set; }
         public double Hashrate { get; set; }
         public double SharesPerSecond { get; set; }
     }
