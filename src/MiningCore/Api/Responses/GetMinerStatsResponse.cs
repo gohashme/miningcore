@@ -40,6 +40,7 @@ namespace MiningCore.Api.Responses
     {
         public DateTime Created { get; set; }
         public Dictionary<string, WorkerPerformanceStats> Workers { get; set; }
+        public WorkerPerformanceStats[] WorkersArray { get; set; }
     }
 
     public class MinerStats
