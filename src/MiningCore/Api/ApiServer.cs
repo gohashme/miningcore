@@ -453,23 +453,23 @@ namespace MiningCore.Api
 
             MinerStats stats = null;
 
-            if (statsResult != null)
-            {
-                stats = mapper.Map<MinerStats>(statsResult);
+            // if (statsResult != null)
+            // {
+            //     stats = mapper.Map<MinerStats>(statsResult);
 
-                // optional fields
-                if (statsResult.LastPayment != null)
-                {
-                    // Set timestamp of last payment
-                    stats.LastPayment = statsResult.LastPayment.Created;
+            //     // optional fields
+            //     if (statsResult.LastPayment != null)
+            //     {
+            //         // Set timestamp of last payment
+            //         stats.LastPayment = statsResult.LastPayment.Created;
 
-                    // Compute info link
-                    if (CoinMetaData.TxInfoLinks.TryGetValue(pool.Coin.Type, out var baseUrl))
-                        stats.LastPaymentLink = string.Format(baseUrl, statsResult.LastPayment.TransactionConfirmationData);
-                }
+            //         // Compute info link
+            //         if (CoinMetaData.TxInfoLinks.TryGetValue(pool.Coin.Type, out var baseUrl))
+            //             stats.LastPaymentLink = string.Format(baseUrl, statsResult.LastPayment.TransactionConfirmationData);
+            //     }
 
-                // stats.PerformanceSamples = GetMinerPerformanceInternal(perfMode, pool, address);
-            }
+            //     stats.PerformanceSamples = GetMinerPerformanceInternal(perfMode, pool, address);
+            // }
 
             if (stats.Performance.Workers != null)
             {
