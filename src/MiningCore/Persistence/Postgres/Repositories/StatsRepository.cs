@@ -178,6 +178,7 @@ namespace MiningCore.Persistence.Postgres.Repositories
                         {
                             Workers = stats.ToDictionary(x => x.Worker ?? string.Empty, x => new WorkerPerformanceStats
                             {
+                                Worker = x.Worker,
                                 Hashrate = x.Hashrate,
                                 SharesPerSecond = x.SharesPerSecond
                             }),
