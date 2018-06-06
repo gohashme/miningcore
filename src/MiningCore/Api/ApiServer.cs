@@ -448,8 +448,8 @@ namespace MiningCore.Api
 
             var perfMode = context.GetQueryParameter<string>("perfMode", "day");
 
-            var statsResult = cf.RunTx((con, tx) =>
-                statsRepo.GetMinerStats(con, tx, pool.Id, address), true, IsolationLevel.Serializable);
+            // var statsResult = cf.RunTx((con, tx) =>
+            //     statsRepo.GetMinerStats(con, tx, pool.Id, address), true, IsolationLevel.Serializable);
 
             MinerStats stats = null;
 
