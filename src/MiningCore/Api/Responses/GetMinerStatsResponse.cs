@@ -31,7 +31,8 @@ namespace MiningCore.Api.Responses
     }
 
     public class WorkerPerformanceStats
-    {
+    {   
+        public string Worker { get; set; }
         public double Hashrate { get; set; }
         public double SharesPerSecond { get; set; }
     }
