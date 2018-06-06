@@ -259,7 +259,8 @@ namespace MiningCore.Persistence.Postgres.Repositories
             {
                 Created = x.Key,
                 Workers = x.ToDictionary(y => y.Worker, y => new WorkerPerformanceStats
-                {
+                {   
+                    Worker = y.Worker,
                     Hashrate = y.Hashrate,
                     SharesPerSecond = y.SharesPerSecond
                 })
