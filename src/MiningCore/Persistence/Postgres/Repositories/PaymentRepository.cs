@@ -39,7 +39,6 @@ namespace MiningCore.Persistence.Postgres.Repositories
 
         private readonly IMapper mapper;
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
-
         public void Insert(IDbConnection con, IDbTransaction tx, Payment payment)
         {
             logger.LogInvoke();
