@@ -235,6 +235,8 @@ namespace MiningCore.Api
 
             // map
             var result = mapper.Map<WorkerPerformanceStatsContainer[]>(stats);
+
+            
             return result;
         }
 
@@ -464,6 +466,13 @@ namespace MiningCore.Api
                 }
 
                 stats.PerformanceSamples = GetMinerPerformanceInternal(perfMode, pool, address);
+            }
+
+            if (stats.Performance != null)
+            {
+                var obj = new { Stats = stats, WorkersArray = stats.Performance.Workers.Values.ToArray() };
+                await SendJsonAsync(context, obj);
+
             }
 
             await SendJsonAsync(context, stats);
