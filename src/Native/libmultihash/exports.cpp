@@ -41,6 +41,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "jh.h"
 #include "c11.h"
 #include "Lyra2RE.h"
+#include "Lyra2Z.h"
 #include "Lyra2.h"
 #include "x16r.h"
 #include "x16s.h"
@@ -74,7 +75,7 @@ extern "C" MODULE_API void x11_export(const char* input, char* output, uint32_t 
 
 extern "C" MODULE_API void x17_export(const char* input, char* output, uint32_t input_len)
 {
-    x17_hash(input, output, input_len);
+  x17_hash(input, output, input_len);
 }
 
 extern "C" MODULE_API void x15_export(const char* input, char* output, uint32_t input_len)
@@ -126,7 +127,7 @@ extern "C" MODULE_API void blake_export(const char* input, char* output, uint32_
 
 extern "C" MODULE_API void blake2s_export(const char* input, char* output, uint32_t input_len)
 {
-    blake2s_hash(input, output, input_len);
+  blake2s_hash(input, output, input_len);
 }
 
 extern "C" MODULE_API void dcrypt_export(const char* input, char* output, uint32_t input_len)
@@ -179,6 +180,11 @@ extern "C" MODULE_API void c11_export(const char* input, char* output)
 	c11_hash(input, output);
 }
 
+extern "C" MODULE_API void lyra2z_export(const char* input, char* output)
+{
+  lyra2z_hash(input, output);
+}
+
 extern "C" MODULE_API void lyra2re_export(const char* input, char* output)
 {
 	lyra2re_hash(input, output);
@@ -191,23 +197,23 @@ extern "C" MODULE_API void lyra2rev2_export(const char* input, char* output)
 
 extern "C" MODULE_API void x16r_export(const char* input, char* output, uint32_t input_len)
 {
-    x16r_hash(input, output, input_len);
+  x16r_hash(input, output, input_len);
 }
 
 extern "C" MODULE_API void x16s_export(const char* input, char* output, uint32_t input_len)
 {
-    x16s_hash(input, output, input_len);
+  x16s_hash(input, output, input_len);
 }
 
 extern "C" MODULE_API bool equihash_verify_export(const char* header, int header_length, const char* solution, int solution_length)
 {
-    if (header_length != 140 || solution_length != 1344) {
-        return false;
-    }
+  if (header_length != 140 || solution_length != 1344) {
+    return false;
+  }
 
-    std::vector<unsigned char> vecSolution(solution, solution + solution_length);
+  std::vector<unsigned char> vecSolution(solution, solution + solution_length);
 
-    return verifyEH(header, vecSolution);
+  return verifyEH(header, vecSolution);
 }
 
 extern "C" MODULE_API void sha3_256_export(const char* input, char* output, uint32_t input_len)

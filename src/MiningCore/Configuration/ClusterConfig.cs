@@ -64,6 +64,7 @@ namespace MiningCore.Configuration
         RVN,  // Ravencoin
         PGN,  // Pigeoncoin 
         WAE,  // WeyCoin
+        RPWN,  // RespawnPay
     }
 
     public class CoinConfig
