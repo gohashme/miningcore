@@ -130,6 +130,9 @@ namespace MiningCore.Blockchain.Bitcoin
             { CoinType.STAK, lyra2Rev2CoinVariantB },
             { CoinType.WAE, lyra2Rev2CoinVariantB },
 
+            // TODO: verify that its variant B
+            { CoinType.DVS, lyra2Rev2CoinVariantB },
+
             // X11
             { CoinType.DASH, x11Coin },
             { CoinType.CANN, x11Coin },
